@@ -14,8 +14,8 @@
   <link rel="icon" href="img/heart.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Bad+Script&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261020a">
+  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20261020c">
 </head>
 <body class="locked">
 <div class="lang" role="group" aria-label="Тил / Язык">
@@ -25,31 +25,34 @@
 
 <main class="page">
 
-  <!-- ===== приглашение ===== -->
-  <section class="intro">
-    <p class="bismillah" data-anim data-i18n="bism">Бисмиллахир-Рахманир-Рахим!</p>
+  <!-- ===== 1. Обложка: монограмма, имена, шёлк (место под фото пары) ===== -->
+  <section class="hero">
+    <p class="bismillah" data-anim>Бисмиллахир-Рахманир-Рахим!</p>
     <p class="eyebrow" data-anim data-i18n="kicker">Тойго чакыруу</p>
-
+    <div class="monogram" data-anim aria-hidden="true">
+      <svg class="monogram-ring" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+        <circle cx="100" cy="100" r="92" pathLength="1"/>
+        <circle cx="100" cy="100" r="84" pathLength="1" stroke-dasharray=".004 .012"/>
+      </svg>
+      <span>А<i>&amp;</i>Б</span>
+    </div>
     <h1 class="names" data-anim>
       <span>Алтынбек</span>
       <span class="amp">&amp;</span>
       <span>Бактыгүл</span>
     </h1>
-
-    <span class="orn orn-band" data-anim aria-hidden="true"></span>
-
-    <div class="intro-text" data-anim>
-      <p data-i18n="dear">Урматтуу туугандар, куда-сөөк, достор жана жакындарыбыз!</p>
-      <p data-i18n="invite">Сиздерди балдарыбыздын баш кошуу тоюна арналган ак дасторконубуздун сыйлуу коногу болууга чакырабыз.</p>
-    </div>
-
-    <div class="scroll-hint" aria-hidden="true">
-      <span data-i18n="scroll">Ылдый жылдырыңыз</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </div>
+    <p class="hero-date" data-anim>15 · 11 · 2026</p>
+    <div class="silk silk-bottom" aria-hidden="true"></div>
   </section>
 
-  <!-- ===== карточка-календарь, как save the date ===== -->
+  <!-- ===== 2. Урматтуу коноктор ===== -->
+  <section class="block greet" data-anim>
+    <h2 class="script-title" data-i18n="dearTitle">Урматтуу коноктор!</h2>
+    <p class="lead" data-i18n="dear">Урматтуу туугандар, куда-сөөк, достор жана жакындарыбыз!</p>
+    <p class="text" data-i18n="invite">Сиздерди балдарыбыздын баш кошуу тоюна арналган ак дасторконубуздун сыйлуу коногу болууга чакырабыз.</p>
+  </section>
+
+  <!-- ===== 3. Дата: открытка-календарь с сердечком ===== -->
   <section class="date-card" data-anim>
     <p class="date-names">Алтынбек &amp; Бактыгүл</p>
     <p class="date-sub" data-i18n="getting">баш кошуу тою</p>
@@ -58,8 +61,8 @@
     <p class="date-day" data-i18n="weekday">Жекшемби</p>
   </section>
 
-  <!-- ===== таймер ===== -->
-  <section class="block" data-anim>
+  <!-- ===== 4. Таймер ===== -->
+  <section class="block countdown" data-anim>
     <p class="eyebrow" data-i18n="until">Тойго чейин</p>
     <div class="timer" id="countdown" role="timer">
       <div class="timer-cell"><span class="timer-value" data-unit="d">00</span><span class="timer-unit" data-i18n="uD">күн</span></div>
@@ -69,17 +72,78 @@
     </div>
   </section>
 
-  <!-- ===== место ===== -->
+  <!-- ===== 5. Тайминг: змейка, по которой катится роза ===== -->
+  <section class="timing" id="timing">
+    <h2 class="script-title" data-anim data-i18n="timing">Тойдун тартиби</h2>
+    <div class="snake" id="snake">
+      <svg class="snake-svg" aria-hidden="true"><path class="snake-base"/><path class="snake-line" pathLength="1"/></svg>
+      <div class="rose" aria-hidden="true">
+        <svg viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="15" fill="#f7ead2"/>
+          <path d="M20 20c2-1 2.5-4 0-5-3-1-6 2-5 5.5s5.5 5 8.5 2.5 3-8.5-1.5-10.5-10 0-11 5 2 10.5 7 11 11-2.5 11.5-8" fill="none" stroke="#c9a46e" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <ol class="snake-items">
+        <li data-icon="heart"><span class="si-time">15:00</span><span class="si-text" data-i18n="t1">Коноктордун чогулушу</span></li>
+        <li data-icon="rings"><span class="si-time">16:00</span><span class="si-text" data-i18n="t2">Тойдун башталышы</span></li>
+        <li data-icon="plate"><span class="si-time">17:00</span><span class="si-text" data-i18n="t3">Ак дасторкон</span></li>
+        <li data-icon="cake"><span class="si-time">22:00</span><span class="si-text" data-i18n="t4">Той торту</span></li>
+        <li data-icon="stars"><span class="si-time">23:00</span><span class="si-text" data-i18n="t5">Кечебиздин аякташы</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 6. Локация: линейный рисунок ресторана ===== -->
   <section class="block venue" data-anim>
-    <svg class="venue-pin" viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M12 31s10-11 10-19A10 10 0 0 0 2 12c0 8 10 19 10 19z"/><circle cx="12" cy="12" r="3.5"/></svg>
-    <p class="eyebrow" data-i18n="venue">Өтүүчү жери</p>
-    <h2 class="venue-name" data-i18n="venueName">«Аяр» рестораны</h2>
+    <h2 class="script-title" data-i18n="venue">Өтүүчү жери</h2>
+    <svg class="building" viewBox="0 0 280 150" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path pathLength="1" d="M6 146H274"/>
+      <path pathLength="1" d="M20 146V66H96V146M184 146V66H260V146"/>
+      <path pathLength="1" d="M14 66H102M178 66H266M14 66l8-12H98l4 12M178 66l4-12h76l8 12"/>
+      <path pathLength="1" d="M96 146V52H184V146"/>
+      <path pathLength="1" d="M88 52H192L140 18Z"/>
+      <circle pathLength="1" cx="140" cy="38" r="7"/>
+      <path pathLength="1" d="M106 60V146M120 60V146M160 60V146M174 60V146M102 60H178"/>
+      <path pathLength="1" d="M128 146V112a12 12 0 0 1 24 0V146"/>
+      <path pathLength="1" d="M30 78h14v20H30zM54 78h14v20H54zM78 78h10v20H78zM30 112h14v20H30zM54 112h14v20H54zM78 112h10v20H78z"/>
+      <path pathLength="1" d="M192 78h10v20h-10zM212 78h14v20h-14zM236 78h14v20h-14zM192 112h10v20h-10zM212 112h14v20h-14zM236 112h14v20h-14z"/>
+      <path pathLength="1" d="M124 146h32M122 150h36"/>
+    </svg>
+    <h3 class="venue-name" data-i18n="venueName">«Аяр» рестораны</h3>
     <p class="venue-address" data-i18n="address">Бишкек шаары, Чүй, 1141, Новопавловка</p>
     <a class="pill-btn" href="https://2gis.kg/bishkek/search/%D0%90%D1%8F%D1%80%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BF%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D0%BA%D0%B0" target="_blank" rel="noopener noreferrer"><span data-i18n="map">Картадан көрүү</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></a>
   </section>
 
-  <!-- ===== пожелание и подпись ===== -->
+  <!-- ===== 7. Детали: тёмный зал, свечи, лучи ===== -->
+  <section class="details">
+    <div class="silk silk-top" aria-hidden="true"></div>
+    <div class="beams" aria-hidden="true"><span></span><span></span></div>
+    <h2 class="script-title" data-anim data-i18n="details">Кошумча маалымат</h2>
+    <ol class="details-list">
+      <li data-anim><span class="dn">1</span><p data-i18n="d1">Гүлдөрдүн ордуна жаштарга жылуу каалоолоруңуз жазылган открытка тартуулаңыз — ал түбөлүк эсте калат.</p></li>
+      <li data-anim><span class="dn">2</span><p data-i18n="d2">Белектериңизди конвертке салып берсеңиз, жаш үй-бүлө үчүн эң ыңгайлуу белек болот.</p></li>
+    </ol>
+    <div class="candles" aria-hidden="true">
+      <i style="--h:62px;--x:12%"></i><i style="--h:86px;--x:24%"></i><i style="--h:48px;--x:33%"></i>
+      <i style="--h:70px;--x:67%"></i><i style="--h:96px;--x:78%"></i><i style="--h:56px;--x:88%"></i>
+    </div>
+    <div class="silk silk-bottom" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===== 8. Дресс-код ===== -->
+  <section class="block dress" data-anim>
+    <h2 class="script-title" data-i18n="dress">Дресс-код</h2>
+    <p class="text" data-i18n="dressText">Тойдун түстөрүн колдонуп кийинсеңиз, биз абдан кубанабыз. Кооз кийимдериңиз жана жылмаюуңуздар — майрамдын эң сонун жасалгасы!</p>
+    <div class="swatches">
+      <span class="sw" style="--c:#f3e2c2"><b data-i18n="c1">шампань</b></span>
+      <span class="sw" style="--c:#e8c4bd"><b data-i18n="c2">пудра</b></span>
+      <span class="sw" style="--c:#7a1020"><b data-i18n="c3">бордо</b></span>
+      <span class="sw" style="--c:#1c1416"><b data-i18n="c4">кара</b></span>
+    </div>
+  </section>
+
+  <!-- ===== 9. Пожелание и подпись ===== -->
   <section class="block hosts" data-anim>
     <span class="orn orn-horns" aria-hidden="true"></span>
     <p class="text" data-i18n="wish">Жаштардын бактысына ортоктош болуп, кубанычыбызды тең бөлүшүп, ак батаңыздарды берип кетишиңиздерди каалайбыз.</p>
@@ -87,11 +151,11 @@
     <p class="hosts-names" data-i18n="hosts">Турсунбек жана Сайнап</p>
   </section>
 
-  <!-- ===== анкета ===== -->
+  <!-- ===== 10. Анкета ===== -->
   <section class="rsvp" id="rsvp" data-anim>
     <form class="form" novalidate>
       <div class="form-head">
-        <h2 class="title" data-i18n="rsvp">Сурамжылоо</h2>
+        <h2 class="script-title" data-i18n="rsvp">Сурамжылоо</h2>
         <p data-i18n="rsvpSub">Тойго катышарыңызды билдирип коюңуз</p>
       </div>
       <label class="form-field"><span data-i18n="nameLabel">Аты-жөнүңүз</span>
@@ -117,29 +181,38 @@
   <p class="sr-only">Алтынбек жана Бактыгүлдүн тою, 15.11.2026, саат 15:00, «Аяр» рестораны, Бишкек</p>
 </main>
 
-<!-- ===== конверт-заставка ===== -->
+<!-- ===== Конверт: ленты крест-накрест и сургучная печать ===== -->
 <button type="button" class="envelope" data-open="false" aria-label="Ачуу үчүн басыңыз" data-i18n-attr="aria-label:open">
-  <span class="envelope-inner">
-    <span class="envelope-top">
-      <span class="eyebrow" data-i18n="kicker">Тойго чакыруу</span>
-      <span class="orn orn-band" aria-hidden="true"></span>
-    </span>
-    <span class="envelope-art">
-      <svg viewBox="0 0 310 214" aria-hidden="true">
-        <rect x="1" y="1" width="308" height="212" rx="6" fill="#f3e2c2" stroke="#d9bf8f"/>
-        <path d="M1 212 L155 112 L309 212" fill="#ead3a8" stroke="#d9bf8f"/>
-        <path class="envelope-flap" d="M1 7 L155 128 L309 7 V1 H1 Z" fill="#e4c995" stroke="#d9bf8f"/>
-      </svg>
-      <span class="seal">А&amp;Б</span>
-    </span>
-    <span class="envelope-bottom">
-      <span class="envelope-names">Алтынбек &amp; Бактыгүл</span>
-      <span class="envelope-date">15 · 11 · 2026</span>
-      <span class="envelope-hint" data-i18n="open">Ачуу үчүн басыңыз</span>
-    </span>
+  <span class="env-half env-top"></span>
+  <span class="env-half env-bottom"></span>
+  <span class="ribbon ribbon-a"></span>
+  <span class="ribbon ribbon-b"></span>
+  <span class="env-title">
+    <span class="env-kicker" data-i18n="envKicker">Тойго</span>
+    <span class="env-script" data-i18n="envScript">чакыруу</span>
+  </span>
+  <span class="seal" aria-hidden="true">
+    <svg viewBox="0 0 120 120">
+      <defs>
+        <radialGradient id="wax" cx="38%" cy="32%" r="75%">
+          <stop offset="0" stop-color="#f6dc96"/><stop offset=".45" stop-color="#d2a650"/><stop offset="1" stop-color="#8a5f1c"/>
+        </radialGradient>
+        <radialGradient id="waxIn" cx="60%" cy="65%" r="70%">
+          <stop offset="0" stop-color="#e7c272"/><stop offset="1" stop-color="#a87a2c"/>
+        </radialGradient>
+      </defs>
+      <path d="M60 4c9 0 12 6 20 8s15-1 20 6 1 13 5 20 10 9 10 18-6 11-8 19 3 15-4 21-13 1-20 5-9 11-19 11-11-6-19-8-15 2-21-5-1-13-5-20-11-9-11-19 7-11 8-19-3-14 4-20 13-1 20-5 11-12 20-12z" fill="url(#wax)"/>
+      <circle cx="60" cy="60" r="37" fill="url(#waxIn)" stroke="#8a5f1c" stroke-opacity=".55" stroke-width="1.5"/>
+      <circle cx="60" cy="60" r="31" fill="none" stroke="#fbe7b0" stroke-opacity=".5" stroke-width=".8"/>
+    </svg>
+    <span class="seal-text">А&amp;Б</span>
+  </span>
+  <span class="env-bottom-text">
+    <span class="env-names">Алтынбек &amp; Бактыгүл</span>
+    <span class="env-hint" data-i18n="open">Ачуу үчүн басыңыз</span>
   </span>
 </button>
 
-<script src="app.js?v=20261020a"></script>
+<script src="app.js?v=20261020c"></script>
 </body>
 </html>

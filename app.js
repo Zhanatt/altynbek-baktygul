@@ -52,21 +52,29 @@ function renderCalendar(lang) {
   </svg>`;
   document.querySelectorAll('.orn-horns').forEach(el => { el.innerHTML = horns; });
   document.querySelectorAll('.orn-band').forEach(el => { el.innerHTML = band; });
-  setTimeout(() => document.querySelectorAll('.envelope .orn').forEach(el => el.classList.add('is-in')), 350);
 })();
 
 /* ===== Язык: кыргызский по умолчанию, русский по кнопке ===== */
 const RU = {
   open: 'Нажмите, чтобы открыть',
+  envKicker: 'Приглашение', envScript: 'на той',
   kicker: 'Приглашение',
+  dearTitle: 'Дорогие гости!',
   dear: 'Разделите с нами радость создания новой семьи!',
   invite: 'С именем Всевышнего и благословением наших родителей приглашаем вас разделить с нами один из самых счастливых и важных дней нашей жизни — создание нашей семьи.',
-  scroll: 'Листайте вниз',
   getting: 'создают семью',
   dateLine: '15 ноября 2026 года', weekday: 'Воскресенье',
   until: 'До торжества осталось', uD: 'дней', uH: 'часов', uM: 'минут', uS: 'секунд',
-  venue: 'Место проведения', venueName: 'Ресторан «Аяр»',
+  timing: 'Программа дня',
+  t1: 'Сбор гостей', t2: 'Начало торжества', t3: 'Праздничный ужин', t4: 'Свадебный торт', t5: 'Завершение вечера',
+  venue: 'Локация', venueName: 'Ресторан «Аяр»',
   address: 'г. Бишкек, Чуй, 1141, Новопавловка', map: 'Открыть карту',
+  details: 'Детали',
+  d1: 'Вместо цветов подарите молодым открытку с тёплыми пожеланиями — она останется на память навсегда.',
+  d2: 'Подарки будем рады принять в конверте — так удобнее всего для молодой семьи.',
+  dress: 'Дресс-код',
+  dressText: 'Будем рады, если вы поддержите цвета нашего праздника. Ваши наряды и улыбки — лучшее украшение вечера!',
+  c1: 'шампань', c2: 'пудра', c3: 'бордо', c4: 'чёрный',
   wish: 'Будем искренне рады видеть вас среди наших дорогих гостей и разделить с вами радость этого особенного дня.',
   regards: 'С уважением и теплом, родители молодожёнов',
   hosts: 'Турсунбек и Сайнап',
@@ -103,6 +111,7 @@ function setLang(lang) {
   });
   document.querySelectorAll('.lang [data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
   renderCalendar(LANG);
+  if (window.layoutSnake) layoutSnake();
   const note = document.querySelector('.form-note');
   if (note) note.textContent = '';
   try { localStorage.setItem('lang', LANG); } catch (e) { /* приватный режим — просто не запоминаем */ }
@@ -155,7 +164,7 @@ function startReveal() {
     removeEventListener('touchmove', block);
     removeEventListener('keydown', keys);
     scrollTo(0, 0);
-    startReveal();
+    setTimeout(startReveal, 700); // пока расходятся половинки конверта
   }
   addEventListener('wheel', block, { passive: false });
   addEventListener('touchmove', block, { passive: false });
@@ -218,4 +227,94 @@ function startReveal() {
       btn.disabled = false;
     }
   });
+})();
+
+/* ===== Шёлк: складки красной ткани ===== */
+(function silk() {
+  const svg = `<svg viewBox="0 0 400 120" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="sA" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#5a0911"/><stop offset=".3" stop-color="#b8222d"/><stop offset=".55" stop-color="#6e0c14"/><stop offset=".8" stop-color="#c22a35"/><stop offset="1" stop-color="#5a0911"/>
+      </linearGradient>
+      <linearGradient id="sB" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#8a1019"/><stop offset=".4" stop-color="#4e070d"/><stop offset=".7" stop-color="#a51b26"/><stop offset="1" stop-color="#5e0a12"/>
+      </linearGradient>
+      <linearGradient id="sH" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffd9c0" stop-opacity="0"/><stop offset=".5" stop-color="#ffd9c0" stop-opacity=".55"/><stop offset="1" stop-color="#ffd9c0" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <g class="fold-c"><path d="M0 70C60 40 110 95 180 62S300 30 400 66V120H0Z" fill="url(#sB)"/></g>
+    <g class="fold-b"><path d="M0 84C70 60 130 110 210 80S330 52 400 82V120H0Z" fill="url(#sA)"/>
+      <path d="M40 80C100 66 150 100 210 82" fill="none" stroke="url(#sH)" stroke-width="2"/></g>
+    <g class="fold-a"><path d="M0 100C80 84 150 118 230 98S350 84 400 100V120H0Z" fill="#6e0c14"/>
+      <path d="M200 99C260 90 320 86 380 98" fill="none" stroke="url(#sH)" stroke-width="1.5"/></g>
+  </svg>`;
+  // id градиентов должны быть уникальны на странице — у каждого шёлка свои
+  document.querySelectorAll('.silk').forEach((el, i) => {
+    el.innerHTML = svg.replace(/id="s([ABH])"/g, `id="s$1${i}"`).replace(/url\(#s([ABH])\)/g, `url(#s$1${i})`);
+  });
+})();
+
+/* ===== Тайминг: змейка, по ней при прокрутке катится роза ===== */
+const ICONS = {
+  heart: '<path pathLength="1" d="M23 39C11 31 5 24.5 5 16.5 5 11 9.3 7 14.3 7c3.8 0 6.8 2.2 8.7 5.4C24.9 9.2 27.9 7 31.7 7 36.7 7 41 11 41 16.5 41 24.5 35 31 23 39Z"/>',
+  rings: '<circle pathLength="1" cx="17" cy="28" r="10"/><circle pathLength="1" cx="29" cy="28" r="10"/><path pathLength="1" d="M13 12l4-5h6l4 5-7 6z"/>',
+  plate: '<circle pathLength="1" cx="23" cy="24" r="13"/><circle pathLength="1" cx="23" cy="24" r="8.5"/><path pathLength="1" d="M5 10v8a2 2 0 0 0 2 2v18M3 10v7M7 10v7M41 10c-3 2-4 6-4 10h4v18"/>',
+  cake: '<rect pathLength="1" x="9" y="30" width="28" height="10" rx="1.5"/><rect pathLength="1" x="13" y="21" width="20" height="9" rx="1.5"/><rect pathLength="1" x="17" y="13" width="12" height="8" rx="1.5"/><path pathLength="1" d="M23 13V8M23 5c1.5 1 1.5 2.5 0 3-1.5-.5-1.5-2 0-3zM6 40h34"/>',
+  stars: '<path pathLength="1" d="M23 6l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path pathLength="1" d="M37 28l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5zM9 30l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/>',
+};
+(function timing() {
+  const snake = document.getElementById('snake');
+  const items = [...snake.querySelectorAll('.snake-items li')];
+  items.forEach(li => li.insertAdjacentHTML('afterbegin',
+    `<svg class="si-icon" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[li.dataset.icon] || ''}</svg>`));
+  const base = snake.querySelector('.snake-base');
+  const line = snake.querySelector('.snake-line');
+  const svg = snake.querySelector('.snake-svg');
+  const rose = snake.querySelector('.rose');
+  const ROW = 190, TOP = 40;
+  let len = 0;
+
+  // волна: изгибы поочерёдно у левого и правого края, пункт — в свободной половине напротив
+  window.layoutSnake = function layoutSnake() {
+    const W = snake.clientWidth;
+    const H = TOP + ROW * items.length + 40;
+    snake.style.height = H + 'px';
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const pt = k => ({ x: k % 2 ? W * .82 : W * .18, y: TOP + ROW * k + ROW / 2 });
+    let d = `M${W / 2} 0C${W / 2} ${TOP} ${pt(0).x} ${pt(0).y - ROW / 2} ${pt(0).x} ${pt(0).y}`;
+    for (let k = 1; k < items.length; k++) {
+      const a = pt(k - 1), b = pt(k);
+      d += `C${a.x} ${a.y + ROW / 2} ${b.x} ${b.y - ROW / 2} ${b.x} ${b.y}`;
+    }
+    const last = pt(items.length - 1);
+    d += `C${last.x} ${last.y + ROW / 2} ${W / 2} ${H - 30} ${W / 2} ${H}`;
+    base.setAttribute('d', d);
+    line.setAttribute('d', d);
+    len = line.getTotalLength();
+    items.forEach((li, k) => {
+      const p = pt(k);
+      li.style.top = p.y + 'px';
+      li.style.left = (k % 2 ? W * .04 : W * .5) + 'px';
+    });
+    update();
+  };
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function update() {
+    if (!len) return;
+    const r = snake.getBoundingClientRect();
+    // роза идёт за серединой экрана: верх змейки — 0, низ — 1
+    const p = reduce ? 1 : Math.min(1, Math.max(0, (innerHeight * .55 - r.top) / r.height));
+    const at = line.getPointAtLength(p * len);
+    rose.style.transform = `translate(${at.x}px, ${at.y}px) rotate(${p * 720}deg)`;
+    line.style.strokeDashoffset = String(1 - p);
+    items.forEach(li => { if (parseFloat(li.style.top) <= at.y + 60) li.classList.add('is-in'); });
+  }
+  let raf = 0;
+  const kick = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); };
+  addEventListener('scroll', kick, { passive: true });
+  addEventListener('resize', () => layoutSnake());
+  document.fonts && document.fonts.ready.then(() => layoutSnake());
+  layoutSnake();
 })();
