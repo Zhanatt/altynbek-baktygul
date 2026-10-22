@@ -355,18 +355,11 @@ soundBtn.addEventListener('click', e => {
 })();
 
 /* ===== Тайминг: змейка, по ней при прокрутке катится роза ===== */
-const ICONS = {
-  heart: '<path pathLength="1" d="M23 39C11 31 5 24.5 5 16.5 5 11 9.3 7 14.3 7c3.8 0 6.8 2.2 8.7 5.4C24.9 9.2 27.9 7 31.7 7 36.7 7 41 11 41 16.5 41 24.5 35 31 23 39Z"/>',
-  rings: '<circle pathLength="1" cx="17" cy="28" r="10"/><circle pathLength="1" cx="29" cy="28" r="10"/><path pathLength="1" d="M13 12l4-5h6l4 5-7 6z"/>',
-  plate: '<circle pathLength="1" cx="23" cy="24" r="13"/><circle pathLength="1" cx="23" cy="24" r="8.5"/><path pathLength="1" d="M5 10v8a2 2 0 0 0 2 2v18M3 10v7M7 10v7M41 10c-3 2-4 6-4 10h4v18"/>',
-  cake: '<rect pathLength="1" x="9" y="30" width="28" height="10" rx="1.5"/><rect pathLength="1" x="13" y="21" width="20" height="9" rx="1.5"/><rect pathLength="1" x="17" y="13" width="12" height="8" rx="1.5"/><path pathLength="1" d="M23 13V8M23 5c1.5 1 1.5 2.5 0 3-1.5-.5-1.5-2 0-3zM6 40h34"/>',
-  stars: '<path pathLength="1" d="M23 6l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path pathLength="1" d="M37 28l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5zM9 30l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/>',
-};
 (function timing() {
   const snake = document.getElementById('snake');
   const items = [...snake.querySelectorAll('.snake-items li')];
-  items.forEach(li => li.insertAdjacentHTML('afterbegin',
-    `<svg class="si-icon" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[li.dataset.icon] || ''}</svg>`));
+  // объёмные картинки Fluent Emoji 3D (Microsoft, MIT) — img/e-*.png
+  items.forEach(li => li.insertAdjacentHTML('afterbegin', `<img class="si-icon" src="img/e-${li.dataset.icon}.png" alt="" aria-hidden="true">`));
   const base = snake.querySelector('.snake-base');
   const line = snake.querySelector('.snake-line');
   const svg = snake.querySelector('.snake-svg');
@@ -406,7 +399,7 @@ const ICONS = {
     // роза идёт за серединой экрана: верх змейки — 0, низ — 1
     const p = reduce ? 1 : Math.min(1, Math.max(0, (innerHeight * .55 - r.top) / r.height));
     const at = line.getPointAtLength(p * len);
-    rose.style.transform = `translate(${at.x}px, ${at.y}px) rotate(${p * 720}deg)`;
+    rose.style.transform = `translate(${at.x}px, ${at.y}px)`;
     line.style.strokeDashoffset = String(1 - p);
     items.forEach(li => { if (parseFloat(li.style.top) <= at.y + 60) li.classList.add('is-in'); });
   }

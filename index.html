@@ -14,8 +14,8 @@
   <link rel="icon" href="img/heart.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261022e">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20261022f">
 </head>
 <body class="locked">
 <div class="lang" role="group" aria-label="Тил / Язык">
@@ -89,17 +89,12 @@
     <h2 class="script-title" data-anim data-i18n="timing">Тойдун тартиби</h2>
     <div class="snake" id="snake">
       <svg class="snake-svg" aria-hidden="true"><path class="snake-base"/><path class="snake-line" pathLength="1"/></svg>
-      <div class="rose" aria-hidden="true">
-        <svg viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="15" fill="#f7ead2"/>
-          <path d="M20 20c2-1 2.5-4 0-5-3-1-6 2-5 5.5s5.5 5 8.5 2.5 3-8.5-1.5-10.5-10 0-11 5 2 10.5 7 11 11-2.5 11.5-8" fill="none" stroke="#c9a46e" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-      </div>
+      <div class="rose" aria-hidden="true"><img src="img/e-rose.png" alt=""></div>
       <ol class="snake-items">
-        <li data-icon="heart"><span class="si-time">15:00</span><span class="si-text" data-i18n="t1">Коноктордун чогулушу</span></li>
-        <li data-icon="rings"><span class="si-time">16:00</span><span class="si-text" data-i18n="t2">Тойдун башталышы</span></li>
-        <li data-icon="plate"><span class="si-time">17:00</span><span class="si-text" data-i18n="t3">Ак дасторкон</span></li>
-        <li data-icon="stars"><span class="si-time">23:00</span><span class="si-text" data-i18n="t5">Кечебиздин аякташы</span></li>
+        <li data-icon="bouquet"><span class="si-time">15:00</span><span class="si-text" data-i18n="t1">Коноктордун чогулушу</span></li>
+        <li data-icon="ring"><span class="si-time">16:00</span><span class="si-text" data-i18n="t2">Тойдун башталышы</span></li>
+        <li data-icon="fork_and_knife_with_plate"><span class="si-time">17:00</span><span class="si-text" data-i18n="t3">Ак дасторкон</span></li>
+        <li data-icon="sparkles"><span class="si-time">23:00</span><span class="si-text" data-i18n="t5">Кечебиздин аякташы</span></li>
       </ol>
     </div>
   </section>
@@ -107,19 +102,7 @@
   <!-- ===== 6. Локация: линейный рисунок ресторана ===== -->
   <section class="block venue" data-anim>
     <h2 class="script-title" data-i18n="venue">Өтүүчү жери</h2>
-    <svg class="building" viewBox="0 0 280 150" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path pathLength="1" d="M6 146H274"/>
-      <path pathLength="1" d="M20 146V66H96V146M184 146V66H260V146"/>
-      <path pathLength="1" d="M14 66H102M178 66H266M14 66l8-12H98l4 12M178 66l4-12h76l8 12"/>
-      <path pathLength="1" d="M96 146V52H184V146"/>
-      <path pathLength="1" d="M88 52H192L140 18Z"/>
-      <circle pathLength="1" cx="140" cy="38" r="7"/>
-      <path pathLength="1" d="M106 60V146M120 60V146M160 60V146M174 60V146M102 60H178"/>
-      <path pathLength="1" d="M128 146V112a12 12 0 0 1 24 0V146"/>
-      <path pathLength="1" d="M30 78h14v20H30zM54 78h14v20H54zM78 78h10v20H78zM30 112h14v20H30zM54 112h14v20H54zM78 112h10v20H78z"/>
-      <path pathLength="1" d="M192 78h10v20h-10zM212 78h14v20h-14zM236 78h14v20h-14zM192 112h10v20h-10zM212 112h14v20h-14zM236 112h14v20h-14z"/>
-      <path pathLength="1" d="M124 146h32M122 150h36"/>
-    </svg>
+    <img class="building" src="img/e-classical_building.png" alt="" loading="lazy">
     <h3 class="venue-name" data-i18n="venueName">«Аяр» рестораны</h3>
     <p class="venue-address" data-i18n="address">Бишкек шаары, Чүй, 1141, Новопавловка</p>
     <a class="pill-btn" href="https://2gis.kg/bishkek/search/%D0%90%D1%8F%D1%80%20%D1%80%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BF%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D0%BA%D0%B0" target="_blank" rel="noopener noreferrer"><span data-i18n="map">Картадан көрүү</span>
@@ -132,8 +115,8 @@
     <div class="beams" aria-hidden="true"><span></span><span></span></div>
     <h2 class="script-title" data-anim data-i18n="details">Кошумча маалымат</h2>
     <ol class="details-list">
-      <li data-anim><span class="dn">1</span><p data-i18n="d1">Гүлдөрдүн ордуна жаштарга жылуу каалоолоруңуз жазылган открытка тартуулаңыз — ал түбөлүк эсте калат.</p></li>
-      <li data-anim><span class="dn">2</span><p data-i18n="d2">Белектериңизди конвертке салып берсеңиз, жаш үй-бүлө үчүн эң ыңгайлуу белек болот.</p></li>
+      <li data-anim><img class="dn" src="img/e-love_letter.png" alt="" loading="lazy"><p data-i18n="d1">Гүлдөрдүн ордуна жаштарга жылуу каалоолоруңуз жазылган открытка тартуулаңыз — ал түбөлүк эсте калат.</p></li>
+      <li data-anim><img class="dn" src="img/e-wrapped_gift.png" alt="" loading="lazy"><p data-i18n="d2">Белектериңизди конвертке салып берсеңиз, жаш үй-бүлө үчүн эң ыңгайлуу белек болот.</p></li>
     </ol>
     <div class="candles" aria-hidden="true">
       <i style="--h:62px;--x:12%"></i><i style="--h:86px;--x:24%"></i><i style="--h:48px;--x:33%"></i>
@@ -228,6 +211,6 @@
   </span>
 </button>
 
-<script src="app.js?v=20261022e"></script>
+<script src="app.js?v=20261022f"></script>
 </body>
 </html>
