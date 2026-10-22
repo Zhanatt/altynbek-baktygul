@@ -23,7 +23,6 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(120% 60% at 50% 0%, rgba(255, 255, 255, .06), transparent 60%);
 }
 body.locked { overflow: hidden; }
 button, input { font: inherit; color: inherit; background: none; border: 0; }
@@ -56,7 +55,7 @@ img, svg { display: block; }
   overflow: hidden; background: var(--red);
 }
 /* фото чёрно-белое, как в примере; сверху и снизу уходит в красный — текст читается */
-.hero-photo { position: absolute; inset: 0 0 24% 0; z-index: 0; }
+.hero-photo { position: absolute; inset: 0 0 24% 0; z-index: 0; overflow: hidden; } /* фото стартует увеличенным — без обрезки его край торчал из-под градиента */
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 68%; filter: grayscale(1) contrast(1.08) brightness(.95); transform: scale(1.06); animation: hero-zoom 14s ease-out forwards; }
 .hero-photo::after {
   content: ""; position: absolute; inset: 0;
