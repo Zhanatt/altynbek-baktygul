@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261022g">
+  <link rel="stylesheet" href="style.css?v=20261022h">
 </head>
 <body class="locked">
 <div class="lang" role="group" aria-label="Тил / Язык">
@@ -109,20 +109,27 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg></a>
   </section>
 
-  <!-- ===== 7. Детали: тёмный зал, свечи, лучи ===== -->
-  <section class="details">
-    <div class="silk silk-top" aria-hidden="true"></div>
-    <div class="beams" aria-hidden="true"><span></span><span></span></div>
-    <h2 class="script-title" data-anim data-i18n="details">Кошумча маалымат</h2>
+  <!-- ===== 7. Детали: карточка на затемнённом фото со свечами ===== -->
+  <section class="details" data-anim>
+    <div class="details-bg" aria-hidden="true"><img src="img/photo-2.jpg" alt="" loading="lazy"></div>
+    <span class="orn orn-horns" aria-hidden="true"></span>
+    <h2 class="script-title" data-i18n="details">Кошумча маалымат</h2>
     <ol class="details-list">
-      <li data-anim><span class="dn ico" data-ico="letter"></span><p data-i18n="d1">Гүлдөрдүн ордуна жаштарга жылуу каалоолоруңуз жазылган открытка тартуулаңыз — ал түбөлүк эсте калат.</p></li>
-      <li data-anim><span class="dn ico" data-ico="gift"></span><p data-i18n="d2">Белектериңизди конвертке салып берсеңиз, жаш үй-бүлө үчүн эң ыңгайлуу белек болот.</p></li>
+      <li>
+        <span class="dn ico" data-ico="letter"></span>
+        <div class="dt">
+          <p class="dt-head"><span class="dt-num">01</span> <span data-i18n="d1h">Гүлдөрдүн ордуна</span></p>
+          <p data-i18n="d1">Гүлдөрдүн ордуна жаштарга жылуу каалоолоруңуз жазылган открытка тартуулаңыз — ал түбөлүк эсте калат.</p>
+        </div>
+      </li>
+      <li>
+        <span class="dn ico" data-ico="gift"></span>
+        <div class="dt">
+          <p class="dt-head"><span class="dt-num">02</span> <span data-i18n="d2h">Белектер</span></p>
+          <p data-i18n="d2">Белектериңизди конвертке салып берсеңиз, жаш үй-бүлө үчүн эң ыңгайлуу белек болот.</p>
+        </div>
+      </li>
     </ol>
-    <div class="candles" aria-hidden="true">
-      <i style="--h:62px;--x:12%"></i><i style="--h:86px;--x:24%"></i><i style="--h:48px;--x:33%"></i>
-      <i style="--h:70px;--x:67%"></i><i style="--h:96px;--x:78%"></i><i style="--h:56px;--x:88%"></i>
-    </div>
-    <div class="silk silk-bottom" aria-hidden="true"></div>
   </section>
 
   <!-- ===== 8. Дресс-код ===== -->
@@ -211,6 +218,6 @@
   </span>
 </button>
 
-<script src="app.js?v=20261022g"></script>
+<script src="app.js?v=20261022h"></script>
 </body>
 </html>

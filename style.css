@@ -161,34 +161,29 @@ img, svg { display: block; }
 }
 .pill-btn svg { width: 14px; height: 14px; }
 
-/* ---------- 7. детали: тёмный зал ---------- */
+/* ---------- 7. детали: карточка на затемнённом фото со свечами ---------- */
 .details {
-  position: relative; overflow: hidden;
-  padding: 150px 28px 210px; margin-block: -24px;
-  background: radial-gradient(90% 60% at 50% 45%, #4a0a12, var(--red-night) 70%);
-  display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center;
+  position: relative; overflow: hidden; isolation: isolate;
+  margin-inline: 16px; padding: 40px 20px 30px; border-radius: 24px;
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
+  box-shadow: 0 24px 50px rgba(40, 0, 6, .4);
 }
-.beams span {
-  position: absolute; top: -40px; width: 120px; height: 420px;
-  background: linear-gradient(to bottom, rgba(255, 236, 200, .42), rgba(255, 236, 200, 0) 85%);
-  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
-  filter: blur(6px); transform-origin: 50% 0; mix-blend-mode: screen;
+.details-bg { position: absolute; inset: -20px; z-index: -1; }
+.details-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 55%; filter: blur(2px) saturate(.95) brightness(.75); }
+.details-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(60, 4, 10, .55), rgba(44, 5, 9, .72) 45%, rgba(44, 5, 9, .88)); }
+.details-list { list-style: none; width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+.details-list li {
+  display: flex; align-items: flex-start; gap: 14px; text-align: left;
+  padding: 16px 16px 16px 14px; border-radius: 16px;
+  background: rgba(243, 226, 194, .06); border: 1px solid rgba(228, 201, 149, .28);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 }
-.beams span:first-child { left: 2%; transform: rotate(-24deg); animation: beam-a 7s ease-in-out infinite alternate; }
-.beams span:last-child { right: 2%; transform: rotate(24deg); animation: beam-b 8s ease-in-out infinite alternate; }
-@keyframes beam-a { to { transform: rotate(-12deg); } }
-@keyframes beam-b { to { transform: rotate(14deg); } }
-.details .script-title { position: relative; }
-.details-list { list-style: none; position: relative; display: flex; flex-direction: column; gap: 26px; max-width: 330px; }
-.details-list li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.dn { width: 50px; height: 50px; }
-.details-list p { position: relative; font-size: 14.5px; line-height: 1.75; color: var(--soft); }
-.candles { position: absolute; left: 0; right: 0; bottom: 70px; height: 120px; }
-.candles i { position: absolute; bottom: 0; left: var(--x); width: 9px; height: var(--h); border-radius: 2px 2px 1px 1px; background: linear-gradient(90deg, #d9c39b, #f6ead0 45%, #c8ad7f); box-shadow: 0 0 18px rgba(255, 200, 120, .15); }
-.candles i::before { content: ""; position: absolute; left: 50%; top: -15px; width: 8px; height: 14px; margin-left: -4px; border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%; background: radial-gradient(circle at 50% 70%, #fff8e1, #ffcc66 45%, rgba(255, 140, 40, .2) 75%); box-shadow: 0 0 22px 8px rgba(255, 190, 90, .35); animation: flicker 1.6s ease-in-out infinite alternate; }
-.candles i:nth-child(2n)::before { animation-duration: 1.2s; }
-.candles i:nth-child(3n)::before { animation-delay: -.6s; }
-@keyframes flicker { 0% { transform: scale(1) rotate(-2deg); opacity: .95; } 50% { transform: scale(.92, 1.08) rotate(2deg); } 100% { transform: scale(1.05, .95) rotate(-1deg); opacity: 1; } }
+.dn { flex: none; width: 46px; height: 46px; padding: 10px; border-radius: 50%; border: 1px solid rgba(228, 201, 149, .45); }
+.dt { display: flex; flex-direction: column; gap: 6px; }
+.dt-head { font-family: var(--font-script); font-style: italic; font-size: 19px; line-height: 1.2; color: var(--champagne); }
+.dt-num { font-family: var(--font-body); font-style: normal; font-size: 10px; letter-spacing: .2em; color: var(--champagne-2); vertical-align: 3px; margin-right: 4px; }
+.dt p:last-child { font-size: 13.5px; line-height: 1.65; color: var(--soft); }
 
 /* ---------- 8. дресс-код ---------- */
 .swatches { display: grid; grid-template-columns: repeat(4, 76px); gap: 18px 8px; justify-content: center; margin-top: 4px; }
@@ -364,7 +359,7 @@ body.scrolled .lang { opacity: 0; transform: translateY(-10px); pointer-events: 
 
 @media (prefers-reduced-motion: reduce) {
   [data-anim], .snake-items li { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .pill-btn, .env-hint, .seal, .hero-photo img, .photos.is-in .photo, .is-in .cal-heart, .silk *, .beams span, .candles i::before { animation: none !important; }
+  .pill-btn, .env-hint, .seal, .hero-photo img, .photos.is-in .photo, .is-in .cal-heart, .silk * { animation: none !important; }
   .orn path, .cal-heart path, .monogram-ring circle, .ico svg * { stroke-dashoffset: 0 !important; transition: none !important; }
   .orn-grow { transform: none !important; opacity: 1 !important; transition: none !important; }
   .env-half, .ribbon { transition-duration: .3s !important; transition-delay: 0s !important; }
