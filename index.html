@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261022c">
+  <link rel="stylesheet" href="style.css?v=20261022e">
 </head>
 <body class="locked">
 <div class="lang" role="group" aria-label="Тил / Язык">
@@ -33,23 +33,21 @@
 
 <main class="page">
 
-  <!-- ===== 1. Обложка: монограмма, имена, шёлк (место под фото пары) ===== -->
+  <!-- ===== 1. Обложка: чёрно-белое фото пары, имена поверх, внизу шёлк ===== -->
   <section class="hero">
-    <p class="bismillah" data-anim>Бисмиллахир-Рахманир-Рахим!</p>
-    <p class="eyebrow" data-anim data-i18n="kicker">Тойго чакыруу</p>
-    <div class="monogram" data-anim aria-hidden="true">
-      <svg class="monogram-ring" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
-        <circle cx="100" cy="100" r="92" pathLength="1"/>
-        <circle cx="100" cy="100" r="84" pathLength="1" stroke-dasharray=".004 .012"/>
-      </svg>
-      <span>А<i>&amp;</i>Б</span>
+    <div class="hero-photo" aria-hidden="true"><img src="img/hero.jpg" alt="" fetchpriority="high"></div>
+    <div class="hero-top">
+      <p class="bismillah" data-anim>Бисмиллахир-Рахманир-Рахим!</p>
+      <p class="eyebrow" data-anim data-i18n="kicker">Тойго чакыруу</p>
     </div>
-    <h1 class="names" data-anim>
-      <span>Алтынбек</span>
-      <span class="amp">&amp;</span>
-      <span>Бактыгүл</span>
-    </h1>
-    <p class="hero-date" data-anim>15 · 11 · 2026</p>
+    <div class="hero-bottom">
+      <h1 class="names" data-anim>
+        <span>Алтынбек</span>
+        <span class="amp">&amp;</span>
+        <span>Бактыгүл</span>
+      </h1>
+      <p class="hero-date" data-anim>15 · 11 · 2026</p>
+    </div>
     <div class="silk silk-bottom" aria-hidden="true"></div>
   </section>
 
@@ -58,6 +56,12 @@
     <h2 class="script-title" data-i18n="dearTitle">Урматтуу коноктор!</h2>
     <p class="lead" data-i18n="dear">Урматтуу туугандар, куда-сөөк, достор жана жакындарыбыз!</p>
     <p class="text" data-i18n="invite">Сиздерди балдарыбыздын баш кошуу тоюна арналган ак дасторконубуздун сыйлуу коногу болууга чакырабыз.</p>
+  </section>
+
+  <!-- ===== Фото пары: карточки в рамке ===== -->
+  <section class="photos" data-anim aria-label="Алтынбек жана Бактыгүл">
+    <figure class="photo photo-a"><img src="img/photo-1.jpg" alt="" loading="lazy"></figure>
+    <figure class="photo photo-b"><img src="img/photo-2.jpg" alt="" loading="lazy"></figure>
   </section>
 
   <!-- ===== 3. Дата: открытка-календарь с сердечком ===== -->
@@ -224,6 +228,6 @@
   </span>
 </button>
 
-<script src="app.js?v=20261022c"></script>
+<script src="app.js?v=20261022e"></script>
 </body>
 </html>

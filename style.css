@@ -51,9 +51,21 @@ img, svg { display: block; }
 /* ---------- 1. обложка ---------- */
 .hero {
   position: relative; min-height: 100vh; min-height: 100svh;
-  padding: 76px 28px 150px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center;
+  padding: 70px 24px 130px;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 16px; text-align: center;
+  overflow: hidden; background: var(--red);
 }
+/* фото чёрно-белое, как в примере; сверху и снизу уходит в красный — текст читается */
+.hero-photo { position: absolute; inset: 0 0 24% 0; z-index: 0; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 68%; filter: grayscale(1) contrast(1.08) brightness(.95); transform: scale(1.06); animation: hero-zoom 14s ease-out forwards; }
+.hero-photo::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(110, 12, 20, .85) 0%, rgba(110, 12, 20, 0) 22%, rgba(158, 22, 32, 0) 58%, rgba(158, 22, 32, .8) 74%, var(--red) 88%, var(--red) 100%);
+}
+@keyframes hero-zoom { to { transform: scale(1); } }
+.hero-top, .hero-bottom { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.hero .names, .hero .bismillah { text-shadow: 0 2px 14px rgba(40, 0, 6, .55); }
 .bismillah { font-family: var(--font-display); font-style: italic; font-size: 19px; color: var(--champagne-2); }
 .monogram { position: relative; width: 150px; height: 150px; margin: 6px 0; display: flex; align-items: center; justify-content: center; color: var(--champagne-2); }
 .monogram-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -64,6 +76,19 @@ img, svg { display: block; }
 .names { display: flex; flex-direction: column; align-items: center; font-family: var(--font-script); font-weight: 400; font-size: 58px; line-height: 1.1; }
 .names .amp { font-size: 36px; color: var(--champagne-2); margin: -6px 0; }
 .hero-date { font-size: 14px; letter-spacing: .32em; color: var(--champagne-2); }
+
+/* ---------- фото пары: две карточки внахлёст ---------- */
+.photos { position: relative; height: 470px; margin-inline: 20px; }
+.photo { position: absolute; margin: 0; padding: 8px 8px 30px; background: var(--champagne); border-radius: 4px; box-shadow: 0 18px 40px rgba(40, 0, 6, .45); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+.photo-a { left: 0; top: 0; width: 60%; height: 330px; transform: rotate(-4deg); }
+.photo-a img { object-position: 62% 50%; }
+.photo-b { right: 0; bottom: 0; width: 56%; height: 330px; transform: rotate(4deg); }
+.photo-b img { object-position: 50% 60%; }
+.photos.is-in .photo-a { animation: drop-a 1.4s var(--ease-settle) both; }
+.photos.is-in .photo-b { animation: drop-b 1.4s var(--ease-settle) .25s both; }
+@keyframes drop-a { from { transform: rotate(-10deg) translateY(40px); opacity: 0; } to { transform: rotate(-4deg); opacity: 1; } }
+@keyframes drop-b { from { transform: rotate(10deg) translateY(40px); opacity: 0; } to { transform: rotate(4deg); opacity: 1; } }
 
 /* ---------- 2. приветствие ---------- */
 .greet { gap: 16px; }
@@ -337,7 +362,7 @@ body.scrolled .lang { opacity: 0; transform: translateY(-10px); pointer-events: 
 
 @media (prefers-reduced-motion: reduce) {
   [data-anim], .snake-items li { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .pill-btn, .env-hint, .seal, .is-in .cal-heart, .silk *, .beams span, .candles i::before { animation: none !important; }
+  .pill-btn, .env-hint, .seal, .hero-photo img, .photos.is-in .photo, .is-in .cal-heart, .silk *, .beams span, .candles i::before { animation: none !important; }
   .orn path, .cal-heart path, .building *, .si-icon *, .monogram-ring circle { stroke-dashoffset: 0 !important; transition: none !important; }
   .orn-grow { transform: none !important; opacity: 1 !important; transition: none !important; }
   .env-half, .ribbon { transition-duration: .3s !important; transition-delay: 0s !important; }
