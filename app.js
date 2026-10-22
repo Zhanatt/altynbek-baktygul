@@ -2,6 +2,10 @@
 const CONFIG = {
   // URL веб-приложения Google Apps Script (см. README.md). Пока пусто — форма не отправится.
   rsvpEndpoint: '',
+  // Музыка — официальный клип через встроенный плеер YouTube (ничего не скачивается):
+  // Maher Zain — For The Rest Of My Life, канал Awakening Music
+  youtubeId: 'PHbZ9SXHJwA',
+  youtubeStart: 0, // с какой секунды играть (и при повторе)
   weddingDate: '2026-11-15T15:00:00+06:00',
   calendar: { year: 2026, month: 11, mark: 15 },
   texts: {
@@ -57,6 +61,7 @@ function renderCalendar(lang) {
 /* ===== Язык: кыргызский по умолчанию, русский по кнопке ===== */
 const RU = {
   open: 'Нажмите, чтобы открыть',
+  sound: 'Включить / выключить музыку',
   envKicker: 'Приглашение', envScript: 'на той',
   kicker: 'Приглашение',
   dearTitle: 'Дорогие гости!',
@@ -74,7 +79,7 @@ const RU = {
   d2: 'Подарки будем рады принять в конверте — так удобнее всего для молодой семьи.',
   dress: 'Дресс-код',
   dressText: 'Будем рады, если вы поддержите цвета нашего праздника. Ваши наряды и улыбки — лучшее украшение вечера!',
-  c1: 'шампань', c2: 'пудра', c3: 'бордо', c4: 'чёрный', c5: 'коричневый', c6: 'золотистый',
+  c1: 'шампань', c2: 'пудра', c3: 'бордо', c4: 'чёрный', c5: 'коричневый', c6: 'золотистый', c7: 'тёмно-винный', c8: 'пыльно-голубой',
   wish: 'Будем искренне рады видеть вас среди наших дорогих гостей и разделить с вами радость этого особенного дня.',
   regards: 'С уважением и теплом, родители молодожёнов',
   hosts: 'Турсунбек и Сайнап',
@@ -144,6 +149,99 @@ function startReveal() {
   items.forEach(el => io.observe(el));
 }
 
+/* ===== Музыка ===== */
+const soundBtn = document.querySelector('.sound-btn');
+let userMuted = false;
+const hideSound = () => { soundBtn.style.display = 'none'; };
+function setPlaying(on) {
+  soundBtn.dataset.playing = String(on);
+  soundBtn.setAttribute('aria-pressed', String(on));
+}
+
+// единый интерфейс плеера: play() / pause() / isPaused()
+const music = youtubeMusic(CONFIG.youtubeId);
+
+function youtubeMusic(id) {
+  let player = null, wantPlay = false;
+  const box = document.createElement('div');
+  box.id = 'yt-music';
+  // YouTube не запускает плеер меньше 200×200 — делаем его полноразмерным, но прозрачным и под содержимым
+  box.style.cssText = 'position:fixed;left:0;bottom:0;width:200px;height:200px;opacity:0;pointer-events:none;z-index:-1';
+  box.innerHTML = '<div id="yt-player"></div>';
+  document.body.appendChild(box);
+
+  const START = CONFIG.youtubeStart || 0;
+  const ready = () => player && player.playVideo;
+  const isOn = () => ready() && [YT.PlayerState.PLAYING, YT.PlayerState.BUFFERING].includes(player.getPlayerState());
+  // кнопка «играет» только когда реально слышно звук
+  const refresh = () => setPlaying(!!(isOn() && !player.isMuted()));
+
+  // Браузеры включают звук только по нажатию. Если музыка стартовала беззвучно
+  // (плеер не успел загрузиться к нажатию на конверт), звук включится от следующего касания.
+  const gestures = ['pointerup', 'touchend', 'keydown'];
+  function unlock() {
+    if (!ready() || !wantPlay || userMuted) return;
+    player.unMute();
+    if (!isOn()) player.playVideo();
+    setTimeout(() => { refresh(); if (isOn() && !player.isMuted()) gestures.forEach(g => removeEventListener(g, unlock, true)); }, 400);
+  }
+  const armUnlock = () => gestures.forEach(g => addEventListener(g, unlock, true));
+
+  function start() {
+    if (player.getCurrentTime() < START) player.seekTo(START, true);
+    player.playVideo();
+  }
+
+  window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player('yt-player', {
+      width: 200, height: 200, videoId: id,
+      playerVars: { autoplay: 0, controls: 0, start: START, playsinline: 1, disablekb: 1, rel: 0 },
+      events: {
+        onReady: () => {
+          player.setVolume(70);
+          // нажатие уже было, а плеер только загрузился — без звука браузер не даст, включим звук по касанию
+          if (wantPlay && !userMuted) { player.mute(); start(); armUnlock(); }
+        },
+        onStateChange: e => {
+          if (e.data === YT.PlayerState.ENDED && wantPlay) { player.seekTo(START, true); player.playVideo(); }
+          refresh();
+        },
+        onError: hideSound, // видео удалено или владелец запретил встраивание (101/150)
+      },
+    });
+  };
+  const s = document.createElement('script');
+  s.src = 'https://www.youtube.com/iframe_api';
+  s.onerror = hideSound;
+  document.head.appendChild(s);
+
+  return {
+    play: () => {
+      wantPlay = true;
+      if (!ready()) return; // запустится в onReady
+      player.unMute();
+      start();
+      setTimeout(() => {
+        refresh();
+        // браузер не дал стартовать со звуком — играем беззвучно, звук включится по следующему касанию
+        if (wantPlay && !userMuted && (!isOn() || player.isMuted())) { player.mute(); start(); armUnlock(); }
+      }, 1500);
+    },
+    pause: () => { wantPlay = false; if (ready()) player.pauseVideo(); setPlaying(false); },
+    isPaused: () => soundBtn.dataset.playing !== 'true',
+  };
+}
+
+function tryPlay() {
+  if (!userMuted) music.play();
+}
+soundBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  if (music.isPaused()) { userMuted = false; music.play(); }
+  else { userMuted = true; music.pause(); }
+});
+['pointerdown', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, tryPlay, { once: true, passive: true }));
+
 /* ===== Конверт ===== */
 (function envelope() {
   const env = document.querySelector('.envelope');
@@ -164,6 +262,7 @@ function startReveal() {
     removeEventListener('touchmove', block);
     removeEventListener('keydown', keys);
     scrollTo(0, 0);
+    tryPlay();
     setTimeout(startReveal, 700); // пока расходятся половинки конверта
   }
   addEventListener('wheel', block, { passive: false });

@@ -164,7 +164,7 @@ img, svg { display: block; }
 @keyframes flicker { 0% { transform: scale(1) rotate(-2deg); opacity: .95; } 50% { transform: scale(.92, 1.08) rotate(2deg); } 100% { transform: scale(1.05, .95) rotate(-1deg); opacity: 1; } }
 
 /* ---------- 8. дресс-код ---------- */
-.swatches { display: grid; grid-template-columns: repeat(3, 88px); gap: 18px 8px; justify-content: center; margin-top: 4px; }
+.swatches { display: grid; grid-template-columns: repeat(4, 76px); gap: 18px 8px; justify-content: center; margin-top: 4px; }
 .sw { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .sw::before {
   content: ""; width: 54px; height: 54px; border-radius: 50%;
@@ -283,6 +283,21 @@ img, svg { display: block; }
 .envelope[data-open="true"] .env-bottom { transform: translateY(102%); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- кнопка музыки: всегда под рукой, справа внизу ---------- */
+.sound-btn {
+  position: fixed; z-index: 110; right: 16px; bottom: max(16px, env(safe-area-inset-bottom));
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(110, 12, 20, .88); border: 1px solid var(--line); color: var(--champagne);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  animation: blink-slow 2.5s ease-in-out infinite alternate;
+}
+.sound-btn svg { width: 20px; height: 20px; }
+.sound-btn[data-playing="true"] { animation: none; }
+.sound-wave { transition: opacity .35s; }
+.sound-btn[data-playing="false"] .sound-wave { opacity: .25; }
+body.locked .sound-btn { opacity: 0; pointer-events: none; }
 
 /* ---------- переключатель языка ---------- */
 .lang {

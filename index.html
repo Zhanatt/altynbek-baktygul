@@ -15,13 +15,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261022a">
+  <link rel="stylesheet" href="style.css?v=20261022b">
 </head>
 <body class="locked">
 <div class="lang" role="group" aria-label="Тил / Язык">
   <button type="button" data-lang="ky" aria-pressed="true">КЫР</button>
   <button type="button" data-lang="ru" aria-pressed="false">РУС</button>
 </div>
+
+<button type="button" class="sound-btn" data-playing="false" aria-pressed="false" aria-label="Музыканы күйгүзүү / өчүрүү" data-i18n-attr="aria-label:sound">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9h4l5-4v14l-5-4H4z"/>
+    <path class="sound-wave" d="M16.5 9a4 4 0 0 1 0 6"/>
+    <path class="sound-wave" d="M19 6.5a7.5 7.5 0 0 1 0 11"/>
+  </svg>
+</button>
 
 <main class="page">
 
@@ -141,6 +149,8 @@
       <span class="sw" style="--c:#1c1416"><b data-i18n="c4">кара</b></span>
       <span class="sw" style="--c:#6b4430"><b data-i18n="c5">күрөң</b></span>
       <span class="sw" style="--c:#c9a24e"><b data-i18n="c6">алтын түс</b></span>
+      <span class="sw" style="--c:#6b0818"><b data-i18n="c7">кочкул кызыл</b></span>
+      <span class="sw" style="--c:#94b1c8"><b data-i18n="c8">ачык көк</b></span>
     </div>
   </section>
 
@@ -214,6 +224,6 @@
   </span>
 </button>
 
-<script src="app.js?v=20261022a"></script>
+<script src="app.js?v=20261022b"></script>
 </body>
 </html>
