@@ -16,5 +16,5 @@
 
 Музыка — Maher Zain «For The Rest Of My Life», официальный клип через плеер YouTube (`CONFIG.youtubeId`), кнопка звука справа внизу.
 
-Иконки `img/e-*.png` — Microsoft Fluent Emoji 3D (https://github.com/microsoft/fluentui-emoji), лицензия MIT.
+Иконки — линейные, цвета шампань, встроены в `app.js` (ICONS): Tabler Icons (MIT), Hugeicons «wedding» (MIT), Lucide Lab «flower-rose-single» (ISC). Цветные 3D-эмодзи пользователь отверг — нужен стиль самого сайта.
 Шрифт заголовков и имён — Playfair Display Italic (читается, есть ү ө ң).
