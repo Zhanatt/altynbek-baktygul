@@ -5,7 +5,7 @@ const CONFIG = {
   // Музыка — официальный клип через встроенный плеер YouTube (ничего не скачивается):
   // Maher Zain — For The Rest Of My Life, канал Awakening Music
   youtubeId: 'PHbZ9SXHJwA',
-  youtubeStart: 0, // с какой секунды играть (и при повторе)
+  youtubeStart: 8, // в клипе первые 8,3 с тишина — играем с момента, где начинается музыка (и при повторе)
   weddingDate: '2026-11-15T15:00:00+06:00',
   calendar: { year: 2026, month: 11, mark: 15 },
   texts: {
