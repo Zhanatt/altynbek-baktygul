@@ -424,3 +424,26 @@ soundBtn.addEventListener('click', e => {
   document.fonts && document.fonts.ready.then(() => layoutSnake());
   layoutSnake();
 })();
+
+/* ===== Дресс-код: образ под каждый цвет, плавно сменяются сами и по нажатию ===== */
+(function dressLooks() {
+  const look = document.querySelector('.look');
+  const btns = [...document.querySelectorAll('.swatches .sw')];
+  if (!look || !btns.length) return;
+  const imgs = [...look.querySelectorAll('img')];
+  let i = 0, timer = 0;
+  function show(k) {
+    i = (k + btns.length) % btns.length;
+    const key = btns[i].dataset.look;
+    imgs.forEach(img => img.classList.toggle('is-shown', img.dataset.look === key));
+    btns.forEach((b, n) => b.classList.toggle('is-active', n === i));
+  }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function play() { clearInterval(timer); if (!reduce) timer = setInterval(() => show(i + 1), 3200); }
+  btns.forEach((b, n) => b.addEventListener('click', () => { show(n); play(); }));
+  // крутим, только пока блок на экране
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) play(); else clearInterval(timer); }).observe(look);
+  } else play();
+  show(0);
+})();
