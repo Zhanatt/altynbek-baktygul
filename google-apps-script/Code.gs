@@ -1,9 +1,10 @@
 /**
  * Приём ответов анкеты с сайта-приглашения в Google Таблицу.
  * Установка — см. README.md (Расширения → Apps Script → Развернуть как веб-приложение).
+ * Ответы с обеих ссылок (общей и для подруг) пишутся на один лист «Гости».
  */
 const SHEET_NAME = 'Гости';
-const HEADERS = ['Дата', 'Аты-жөнү', 'Жооп', 'Адам саны', 'Шилтеме'];
+const HEADERS = ['Дата', 'Аты-жөнү', 'Жооп', 'Адам саны', 'Бардыгы'];
 
 // сколько человек придёт по каждому варианту ответа
 const GUESTS = {
@@ -21,9 +22,7 @@ function doPost(e) {
     const answer = String(data.answer || '').trim();
     if (!name || !(answer in GUESTS)) return json({ ok: false, error: 'bad request' });
 
-    // по какой ссылке пришёл ответ: подругам (?for=kurbular) или общей
-    const link = /[?&]for=kurbular\b/.test(String(data.page || '')) ? 'Курбулар' : 'Баары';
-    getSheet().appendRow([new Date(), name, answer, GUESTS[answer], link]);
+    getSheet().appendRow([new Date(), name, answer, GUESTS[answer]]);
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) });
@@ -33,7 +32,9 @@ function doPost(e) {
 }
 
 // открыть URL веб-приложения в браузере — проверка, что всё развёрнуто
+// (заодно приводит лист к нужному виду)
 function doGet() {
+  getSheet();
   return json({ ok: true, sheet: SHEET_NAME });
 }
 
@@ -41,15 +42,18 @@ function getSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
-    sh = ss.insertSheet(SHEET_NAME);
-    sh.appendRow(HEADERS);
+    sh = ss.insertSheet(SHEET_NAME, 0);
     sh.setFrozenRows(1);
-    sh.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
     sh.getRange('A:A').setNumberFormat('dd.MM.yyyy HH:mm');
-    // итог в шапке: сколько всего гостей придёт
-    sh.getRange('G1').setValue('Бардыгы:');
-    sh.getRange('H1').setFormula('=SUM(D2:D)');
   }
+  // шапка; в столбце «Бардыгы» под заголовком — сумма всех гостей
+  sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
+  const total = sh.getRange('E2');
+  if (total.getFormula() !== '=SUM(D2:D)') total.setFormula('=SUM(D2:D)').setFontWeight('bold');
+  // убрать то, что осталось от прежней раскладки: «Шилтеме» в E и итог в G1:H1
+  const last = sh.getLastRow();
+  if (last >= 3) sh.getRange(3, 5, last - 2, 1).clearContent();
+  sh.getRange('F1:H1').clearContent();
   return sh;
 }
 
