@@ -1,7 +1,7 @@
 /* ===== Настройки ===== */
 const CONFIG = {
   // URL веб-приложения Google Apps Script (см. README.md). Пока пусто — форма не отправится.
-  rsvpEndpoint: '',
+  rsvpEndpoint: 'https://script.google.com/macros/s/AKfycbwi8HdFJ6WIAVTA7L-KsJtHpliMRk54rCswq7FUypXtwXabJ2EicsPgD86dBFwRy8k/exec',
   // Музыка — официальный клип через встроенный плеер YouTube (ничего не скачивается):
   // Maher Zain — For The Rest Of My Life, канал Awakening Music
   youtubeId: 'PHbZ9SXHJwA',
