@@ -431,11 +431,19 @@ soundBtn.addEventListener('click', e => {
   const btns = [...document.querySelectorAll('.swatches .sw')];
   if (!look || !btns.length) return;
   const imgs = [...look.querySelectorAll('img')];
-  let i = 0, timer = 0;
+  let i = 0, timer = 0, clean = 0;
   function show(k) {
     i = (k + btns.length) % btns.length;
     const key = btns[i].dataset.look;
-    imgs.forEach(img => img.classList.toggle('is-shown', img.dataset.look === key));
+    const next = imgs.find(img => img.dataset.look === key);
+    const cur = imgs.find(img => img.classList.contains('is-shown'));
+    if (next === cur) return btns.forEach((b, n) => b.classList.toggle('is-active', n === i));
+    // прежний образ остаётся под новым, пока тот проявляется, — меняется только одежда
+    imgs.forEach(img => img.classList.remove('is-prev'));
+    if (cur) { cur.classList.remove('is-shown'); cur.classList.add('is-prev'); }
+    if (next) next.classList.add('is-shown');
+    clearTimeout(clean);
+    clean = setTimeout(() => imgs.forEach(img => img.classList.remove('is-prev')), 950);
     btns.forEach((b, n) => b.classList.toggle('is-active', n === i));
   }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
