@@ -428,6 +428,11 @@ soundBtn.addEventListener('click', e => {
 /* ===== Дресс-код: образ под каждый цвет, плавно сменяются сами и по нажатию ===== */
 (function dressLooks() {
   const look = document.querySelector('.look');
+  // Две ссылки: подругам (?for=kurbular) — только голубой, всем остальным — все цвета, кроме голубого
+  const friends = new URLSearchParams(location.search).get('for') === 'kurbular';
+  document.querySelectorAll('.swatches .sw, .look img').forEach(el => {
+    if ((el.dataset.look === 'blue') !== friends) el.remove();
+  });
   const btns = [...document.querySelectorAll('.swatches .sw')];
   if (!look || !btns.length) return;
   const imgs = [...look.querySelectorAll('img')];
