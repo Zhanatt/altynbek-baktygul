@@ -3,7 +3,7 @@
  * Установка — см. README.md (Расширения → Apps Script → Развернуть как веб-приложение).
  */
 const SHEET_NAME = 'Гости';
-const HEADERS = ['Дата', 'Аты-жөнү', 'Жооп', 'Адам саны'];
+const HEADERS = ['Дата', 'Аты-жөнү', 'Жооп', 'Адам саны', 'Шилтеме'];
 
 // сколько человек придёт по каждому варианту ответа
 const GUESTS = {
@@ -21,7 +21,9 @@ function doPost(e) {
     const answer = String(data.answer || '').trim();
     if (!name || !(answer in GUESTS)) return json({ ok: false, error: 'bad request' });
 
-    getSheet().appendRow([new Date(), name, answer, GUESTS[answer]]);
+    // по какой ссылке пришёл ответ: подругам (?for=kurbular) или общей
+    const link = /[?&]for=kurbular\b/.test(String(data.page || '')) ? 'Курбулар' : 'Баары';
+    getSheet().appendRow([new Date(), name, answer, GUESTS[answer], link]);
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) });
@@ -45,8 +47,8 @@ function getSheet() {
     sh.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
     sh.getRange('A:A').setNumberFormat('dd.MM.yyyy HH:mm');
     // итог в шапке: сколько всего гостей придёт
-    sh.getRange('F1').setValue('Бардыгы:');
-    sh.getRange('G1').setFormula('=SUM(D2:D)');
+    sh.getRange('G1').setValue('Бардыгы:');
+    sh.getRange('H1').setFormula('=SUM(D2:D)');
   }
   return sh;
 }
