@@ -30,6 +30,7 @@ const ICONS = {
   night: '<path pathLength="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992zm5 1a2 2 0 0 0 2 2a2 2 0 0 0-2 2a2 2 0 0 0-2-2a2 2 0 0 0 2-2m2 7h2m-1-1v2"/>',
   venue: '<path pathLength="1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 21h18M3 10h18M5 6l7-3l7 3M4 10v11m16-11v11M8 14v3m4-3v3m4-3v3"/>',
   letter: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path pathLength="1" d="M10.5 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"/><path pathLength="1" d="m3 7l9 6l2.983-1.989L21 7m-3 15l3.35-3.284a2.143 2.143 0 0 0 .005-3.071a2.24 2.24 0 0 0-3.129-.006l-.224.22l-.223-.22a2.24 2.24 0 0 0-3.128-.006a2.143 2.143 0 0 0-.006 3.071z"/></g>',
+  heart: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" pathLength="1" d="M19.5 12.572L12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/>',
   gift: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path pathLength="1" d="M3 9a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm9-1v13"/><path pathLength="1" d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7m2.5-4a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5a2.5 2.5 0 0 1 0 5"/></g>',
   rose: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path pathLength="1" d="M18 9.52a4.04 4.04 0 1 1 2-3.47"/><circle pathLength="1" cx="17" cy="7.8" r="2"/><path pathLength="1" d="m14 2.5l-2 1.3a6 6 0 1 0 6 10.4l2-1.2a4 4 0 0 0-4-6.95"/><path pathLength="1" d="M9.77 12C4 15 2 22 2 22"/><path pathLength="1" d="M13 20s-5 3-9.2-2c0 0 5.2-3 9.2 2"/></g>',
 };
@@ -90,6 +91,8 @@ const RU = {
   address: 'г. Бишкек, Чуй, 1141, Новопавловка', map: 'Открыть карту',
   details: 'Детали',
   d1h: 'Вместо цветов', d2h: 'Подарки',
+  h1: 'На нашей свадьбе алкоголь не предусмотрен. Просим воздержаться от его употребления и проноса на территорию ресторана. Вход для гостей в состоянии алкогольного опьянения не допускается.',
+  h2: 'Для соблюдения порядка на мероприятии будет присутствовать охрана. Благодарим за понимание и уважение к нашим правилам.',
   d1: 'Вместо цветов подарите молодым открытку с тёплыми пожеланиями — она останется на память навсегда.',
   d2: 'Подарки будем рады принять в конверте — так удобнее всего для молодой семьи.',
   dress: 'Дресс-код',
